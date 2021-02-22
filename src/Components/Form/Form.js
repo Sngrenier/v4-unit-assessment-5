@@ -25,7 +25,7 @@ class Form extends Component {
     let imgSrc = this.state.img ? this.state.img : noImage;
 
     return (
-      <div className='form content-box'>
+      <div className='form form-content-box'>
         <h2 className='title'>New Post</h2>
         <div className='form-main'>
           <div className='form-input-box'>
@@ -42,7 +42,9 @@ class Form extends Component {
             <textarea value={this.state.content} onChange={e => this.setState({ content: e.target.value })} />
           </div>
         </div>
+        <div className='form-button'>
         <button onClick={this.submit} className='dark-button'>Post</button>
+        </div>
       </div>
     );
   }

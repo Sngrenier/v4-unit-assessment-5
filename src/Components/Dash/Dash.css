@@ -1,10 +1,22 @@
+@media screen and (max-width: 608px) {
+  .dash {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
 .dash {
-    width: 70%;
-    margin: 0 auto;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .dash-filter {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   margin: 10px 0;
@@ -29,7 +41,7 @@
   align-items: center;
 }
 
-.dash-post-box{
+.dash-post-box {
   display: flex;
   justify-content: space-between;
   align-items: center;

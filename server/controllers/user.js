@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 module.exports = {
     register: async (req, res) => {
         const {username, password, profile_pic} = req.body
+        console.log(req.body)
         const db = req.app.get('db')
         const result = await db.user.find_user_by_username([username])
         const newUser = result[0]
@@ -44,6 +45,7 @@ module.exports = {
     logout: (req, res) => {
         req.session.destroy()
         return res.sendStatus(200)
+        // res.redirect('http://localhost:3000')
     },
 
     getUser: (req, res) => {

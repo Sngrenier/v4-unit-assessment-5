@@ -66,7 +66,7 @@ class Dash extends Component {
 
     let mappedPosts = posts.map(post => {
       return <div className='content-box dash-post-box' key={post.post_id}>
-          <Link key={post.post_id}>
+          <Link to={`/post/${post.post_id}`}>
           <h3>{post.title}</h3>
           </Link>
           {
@@ -81,7 +81,7 @@ class Dash extends Component {
           }
         </div>
     })
-    
+    console.log(this.props.username)
     return (
       <div className='dash'>
         <div className='content-box dash-filter'>
@@ -116,9 +116,9 @@ class Dash extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return state;
 }
 
 
 export default connect(mapStateToProps)(Dash);
-// export default Dash;

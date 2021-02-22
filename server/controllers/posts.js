@@ -41,23 +41,30 @@ module.exports = {
         let { id } = req.session.user 
         let { title, img, content} = req.body
         let db = req.app.get('db')  
-        const date = new Date
-        const postResult = await db.create_post([id])
-        let notLoggedIn = postResult[0]
-        if (notLoggedIn){
-            return res.status(403).send('You must be logged in to Post.')
-        }
-        let loggedInUser = await db.create_post([ title, img, content])
-          let user = loggedInUser[0]
-            if(user) {
-            return res.status(201).send(req.session.user)
-            }
+        const date = new Date()
+        if (id) {
+          const postResult = await db.post.create_post([id, title, img, content, date])
+          return res.sendStatus(201)
+        } else {
+          return res.status(403).send('You must be logged in to Post.')
+        } 
+        
+        // let notLoggedIn = postResult[0]
+        // if (notLoggedIn){
+        //     return res.status(403).send('You must be logged in to Post.')
+        // }
+        // let loggedInUser = await db.post.create_post([ title, img, content])
+        //   let user = loggedInUser[0]
+        //     if(user) {
+        //     return res.status(201).send(req.session.user)
+        //     }
     },
     readPost: (req, res) => {
       req.app.get('db').post.read_post(req.params.id)
         .then(post => post[0] ? res.status(200).send(post[0]) : res.status(200).send({}))
     },
     deletePost: (req, res) => {
+      console.log(req.params.id)
       req.app.get('db').post.delete_post(req.params.id)
         .then(_ => res.sendStatus(200))
     }

@@ -1,43 +1,40 @@
 const initialState = {
-    user: '',
-    profilePicture: ''
+    username: null,
+    profile_pic: null
 }
 
-UPDATE_USER = "UPDATE_USER"
-LOGOUT_USER = "LOGOUT_USER"
+const UPDATE_USER = "UPDATE_USER"
+const LOGOUT_USER = "LOGOUT_USER"
 
-// Action function/builder:
-// export function updateUser() {
-//     return {
-//         type: UPDATE_USER,
-//         payload: user, profilePicture
-//     }
-// }
 
-export function updateUser() {
-let data = axios.get('/api/auth/me').then(res => res.data)
+//ACTION BUILDER:
+export function updateUser(user) {
+    console.log('reducer',user)
     return{
         type: UPDATE_USER,
-        payload: data
+        payload: user
     }
 }
 
+//ACTION BUILDER:
 export function logoutUser(){
-    let data = axios.post('/api/auth/logout').then(res=> res.data)
     return{
         type: LOGOUT_USER,
-        payload: data
+        payload: {
+            username: null,
+            profile_pic: null
+        }
     }
 }
 
-//Reducer function:
+//REDUCER FUNCTION:
 export default function reducer(state = initialState, action){
-    switch(action.type){
-        case UPDATE_USER + "_FUFILLED":
-            const { username, profilePicture } = action.payload.user
-            return{ username, profilePicture }
+    const {type, payload } = action
+    switch(type){
+        case UPDATE_USER:
+            return{ ...state, ...payload }
         case LOGOUT_USER:
-            return {state = ''} 
+            return{ ...state, ...payload }
         default:
             return state
     }
